@@ -13,12 +13,12 @@ public class NoteCriterion : MonoBehaviour {
 	
 	}
 
-    void OnCollisionEnter(UnityEngine.Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        var note = collision.gameObject.GetComponent<Note>();
+        var note = collider.gameObject.GetComponent<Note>();
         if (note != null)
         {
-            NoteManager.Instance.AddHitGroup(note, this);
+            NoteManager.Instance.AddHitResultSet(note, this);
         }
     }
 }
