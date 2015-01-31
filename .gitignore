@@ -20,3 +20,6 @@ sysinfo.txt
 *.ipch
 *.opensdf
 *.sdf
+
+# Temp
+Assets/BMS_Data/
