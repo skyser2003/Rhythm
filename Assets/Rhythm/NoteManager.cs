@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using NoteParser;
 
 public class NoteManager : MonoBehaviour
 {
     static public NoteManager Instance = null;
 
-    private List<KeyValuePair<Note, NoteCriterion>> hitList = new List<KeyValuePair<Note, NoteCriterion>>();
+    private List<KeyValuePair<NoteObject, NoteCriterion>> hitList = new List<KeyValuePair<NoteObject, NoteCriterion>>();
     private int bpm;
 
-    private void SingleNoteHitResult(SingleNote note, NoteCriterion criterion)
+    private void SingleNoteHitResult(SingleNoteObject note, NoteCriterion criterion)
     {
         Destroy(note.gameObject);
     }
 
-    private void LongNoteHitResult(LongNote note, NoteCriterion criterion)
+    private void LongNoteHitResult(LongNoteObject note, NoteCriterion criterion)
     {
     }
 
@@ -122,19 +123,19 @@ public class NoteManager : MonoBehaviour
     {
         foreach (var pair in hitList)
         {
-            var note = pair.Key as Note;
+            var note = pair.Key as NoteObject;
             var criterion = pair.Value as NoteCriterion;
 
             switch (note.Type)
             {
                 case NOTE_TYPE.SINGLE_NOTE:
                     {
-                        SingleNoteHitResult((SingleNote)note, criterion);
+                        SingleNoteHitResult((SingleNoteObject)note, criterion);
                     }
                     break;
                 case NOTE_TYPE.LONG_NOTE:
                     {
-                        LongNoteHitResult((LongNote)note, criterion);
+                        LongNoteHitResult((LongNoteObject)note, criterion);
                     }
                     break;
             }
@@ -143,8 +144,8 @@ public class NoteManager : MonoBehaviour
         hitList.Clear();
     }
 
-    public void AddHitResultSet(Note note, NoteCriterion criterion)
+    public void AddHitResultSet(NoteObject note, NoteCriterion criterion)
     {
-        hitList.Add(new KeyValuePair<Note, NoteCriterion>(note, criterion));
+        hitList.Add(new KeyValuePair<NoteObject, NoteCriterion>(note, criterion));
     }
 }

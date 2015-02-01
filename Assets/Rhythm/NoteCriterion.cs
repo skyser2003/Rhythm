@@ -15,7 +15,7 @@ public class NoteCriterion : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
-        var note = collider.gameObject.GetComponent<Note>();
+        var note = collider.gameObject.GetComponent<NoteObject>();
         if (note != null)
         {
             NoteManager.Instance.AddHitResultSet(note, this);
