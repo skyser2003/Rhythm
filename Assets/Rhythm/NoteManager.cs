@@ -112,6 +112,9 @@ public class NoteManager : MonoBehaviour
         var path = "C:\\Projects\\Rhythm\\Assets\\BMS_Data\\002. Ehne&Sing88 - Abyss\\Abbys5b.bms";
         var contents = System.IO.File.ReadAllText(path);
         Parse(contents);
+
+        NoteParser.Document file = new NoteParser.Document();
+        file.Parse(Resources.Load<TextAsset>("song/sample").text);
     }
 
     // Update is called once per frame

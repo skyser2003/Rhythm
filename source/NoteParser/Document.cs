@@ -8,8 +8,27 @@ namespace NoteParser
 {
     public class Document
     {
-        void Parse(string filename)
+        public class File
         {
+            public Header header;
+            public NoteList notes;
+        }
+
+        public class Header
+        {
+            public string songName;
+            public string author;
+            public int difficulty;
+        }
+
+        public class NoteList
+        {
+
+        }
+
+        public void Parse(string content)
+        {
+            var file = JsonMapper.ToObject<File>(content);
         }
     }
 }
