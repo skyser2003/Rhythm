@@ -8,9 +8,12 @@ namespace NoteParser
 {
     public class Document
     {
+        private File file;
+        public File File { get { return file; } }
+
         public void Parse(string content)
         {
-            var file = JsonMapper.ToObject<File>(content);
+            file = JsonMapper.ToObject<File>(content);
         }
     }
 }
