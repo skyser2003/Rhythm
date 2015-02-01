@@ -11,7 +11,7 @@ namespace NoteParser
         public class File
         {
             public Header header;
-            public NoteList notes;
+            public Node[] nodes;
         }
 
         public class Header
@@ -21,9 +21,39 @@ namespace NoteParser
             public int difficulty;
         }
 
-        public class NoteList
+        public class Node
         {
+            public double speed;
+            public Notes notes;
+        }
 
+        public class Notes
+        {
+            public SingleNote[] singleNotes;
+            public LongNote[] longNotes;
+        }
+
+        public class Note
+        {
+            public string type;
+        }
+
+        public class SingleNote : Note
+        {
+            public double time;
+            public Vector2[] coords;
+        }
+
+        public class LongNote : Note
+        {
+            public double beginTime;
+            public double endTime;
+        }
+
+        public class Vector2
+        {
+            public double x;
+            public double y;
         }
 
         public void Parse(string content)
