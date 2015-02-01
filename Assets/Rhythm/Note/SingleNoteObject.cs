@@ -1,16 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum NOTE_TYPE
+public class SingleNoteObject : NoteObject
 {
-    SINGLE_NOTE,
-    LONG_NOTE
-}
-
-public class Note : MonoBehaviour
-{
-    public NOTE_TYPE Type { get { return type; } }
-    protected NOTE_TYPE type;
+    SingleNoteObject()
+    {
+        type = NOTE_TYPE.SINGLE_NOTE;
+    }
 
     // Use this for initialization
     void Start()
@@ -21,6 +17,6 @@ public class Note : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //gameObject.rigidbody.velocity = new Vector3(0, 0, -10);
     }
 }

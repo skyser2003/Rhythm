@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LongNote : Note
+public class LongNoteObject : NoteObject
 {
     private Vector3 begin;
     private Vector3 end;
@@ -10,7 +10,7 @@ public class LongNote : Note
     public Vector3 Begin { get { return begin; } }
     public Vector3 End { get { return end; } }
 
-    LongNote()
+    LongNoteObject()
     {
         type = NOTE_TYPE.LONG_NOTE;
     }
