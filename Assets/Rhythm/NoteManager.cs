@@ -35,9 +35,28 @@ public class NoteManager : MonoBehaviour
         }
     }
 
-    private void CreateLongNote()
+    private void CreateLongNote(NoteParser.Node node, NoteParser.LongNote note, int madi)
     {
+        float secPerMadi = 60.0f / (float)120;
+        int madiLength = 10;
 
+        var bezier = new Bezier();
+        bezier.Init(note.coords);
+
+        for(float f = 0.0f; f <= 1.0f; f += 0.01f)
+        {
+            var coord = bezier.GetPosition(f);
+
+            float x = (float)coord.x;
+            float y = (float)coord.y;
+            var time = note.time;
+
+            Debug.Log("x : " + coord.x + ", y : " + coord.y);
+
+            var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
+            clone.GetComponent<Transform>().position = new Vector3(x, y * 3, (float)(madi + time) * madiLength);
+            clone.rigidbody.velocity = new Vector3(0, 0, -1 * secPerMadi * madiLength);
+        }
     }
 
     // Use this for initialization
@@ -59,9 +78,20 @@ public class NoteManager : MonoBehaviour
             var singleNotes = node.notes.singleNotes;
             var longNotes = node.notes.longNotes;
 
-            foreach (var singleNote in singleNotes)
+            if (singleNotes != null)
             {
-                CreateSingleNote(node, singleNote, i);
+                foreach (var singleNote in singleNotes)
+                {
+                    CreateSingleNote(node, singleNote, i);
+                }
+            }
+
+            if (longNotes != null)
+            {
+                foreach (var longNote in longNotes)
+                {
+                    CreateLongNote(node, longNote, i);
+                }
             }
         }
     }
