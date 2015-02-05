@@ -18,19 +18,19 @@ public class NoteManager : MonoBehaviour
     {
     }
 
-    private void CreateSingleNote(NoteParser.Node node, NoteParser.SingleNote note, int madi)
+    private void CreateSingleNote(NoteParser.Node node, NoteParser.Vec3[] coords, int madi)
     {
         float secPerMadi = 60.0f / (float)120;
         int madiLength = 10;
 
-        foreach (var coord in note.coords)
+        foreach (var coord in coords)
         {
             float x = (float)coord.x;
             float y = (float)coord.y;
-            var time = note.time;
+            float ratio = (float)coord.z;
 
             var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-            clone.GetComponent<Transform>().position = new Vector3(x, y * 3, (float)(madi + time) * madiLength);
+            clone.GetComponent<Transform>().position = new Vector3(x, y * 3, (float)(madi + ratio) * madiLength);
             clone.rigidbody.velocity = new Vector3(0, 0, -1 * secPerMadi * madiLength);
         }
     }
@@ -41,7 +41,7 @@ public class NoteManager : MonoBehaviour
         int madiLength = 10;
 
         var bezier = new Bezier();
-        bezier.Init(note.coords);
+        bezier.Init(note.bezier);
 
         for(float f = 0.0f; f <= 1.0f; f += 0.01f)
         {
@@ -49,12 +49,12 @@ public class NoteManager : MonoBehaviour
 
             float x = (float)coord.x;
             float y = (float)coord.y;
-            var time = note.time;
+            float ratio = (float)coord.z;
 
             Debug.Log("x : " + coord.x + ", y : " + coord.y);
 
             var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-            clone.GetComponent<Transform>().position = new Vector3(x, y * 3, (float)(madi + time) * madiLength);
+            clone.GetComponent<Transform>().position = new Vector3(x, y * 3, (float)(madi + ratio) * madiLength);
             clone.rigidbody.velocity = new Vector3(0, 0, -1 * secPerMadi * madiLength);
         }
     }
@@ -80,10 +80,7 @@ public class NoteManager : MonoBehaviour
 
             if (singleNotes != null)
             {
-                foreach (var singleNote in singleNotes)
-                {
-                    CreateSingleNote(node, singleNote, i);
-                }
+                CreateSingleNote(node, singleNotes, i);
             }
 
             if (longNotes != null)

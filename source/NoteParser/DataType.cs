@@ -26,25 +26,13 @@ namespace NoteParser
 
     public class Notes
     {
-        public SingleNote[] singleNotes;
+        public Vec3[] singleNotes;
         public LongNote[] longNotes;
     }
 
-    public class Note
+    public class LongNote
     {
-        public string type;
-    }
-
-    public class SingleNote : Note
-    {
-        public double time;
-        public Vec2[] coords;
-    }
-
-    public class LongNote : Note
-    {
-        public double time;
-        public Vec3[] coords;
+        public Vec3[] bezier;
     }
 
     public class Vec2
