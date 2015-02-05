@@ -43,18 +43,19 @@ public class NoteManager : MonoBehaviour
         var bezier = new Bezier();
         bezier.Init(note.bezier);
 
-        for(float f = 0.0f; f <= 1.0f; f += 0.01f)
+        for (int i = 0; i < 100; ++i)
         {
+            float f = i * 0.01f;
             var coord = bezier.GetPosition(f);
 
             float x = (float)coord.x;
             float y = (float)coord.y;
             float ratio = (float)coord.z;
 
-            Debug.Log("x : " + coord.x + ", y : " + coord.y);
+            Debug.Log("x : " + coord.x + ", y : " + coord.y + ", z : " + coord.z);
 
             var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-            clone.GetComponent<Transform>().position = new Vector3(x, y * 3, (float)(madi + ratio) * madiLength);
+            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * madiLength);
             clone.rigidbody.velocity = new Vector3(0, 0, -1 * secPerMadi * madiLength);
         }
     }
