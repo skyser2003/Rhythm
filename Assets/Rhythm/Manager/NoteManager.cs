@@ -20,9 +20,6 @@ public class NoteManager : MonoBehaviour
 
     private void CreateSingleNote(NoteParser.Node node, NoteParser.Vec3[] coords, int madi)
     {
-        float secPerMadi = 60.0f / (float)120;
-        int madiLength = 10;
-
         foreach (var coord in coords)
         {
             float x = (float)coord.x;
@@ -30,8 +27,8 @@ public class NoteManager : MonoBehaviour
             float ratio = (float)coord.z;
 
             var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-            clone.GetComponent<Transform>().position = new Vector3(x, y * 3, (float)(madi + ratio) * madiLength);
-            clone.rigidbody.velocity = new Vector3(0, 0, -1 * secPerMadi * madiLength);
+            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameManager.madiLength);
+            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameManager.secPerMadi * GameManager.madiLength);
         }
     }
 
