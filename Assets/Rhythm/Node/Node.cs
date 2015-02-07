@@ -15,7 +15,7 @@ class Node
         this.index = index;
 
         wall = UnityEngine.Object.Instantiate(GameObject.Find("SampleWall")) as GameObject;
-        wall.rigidbody.velocity = new Vector3(0, 0, -1 * GameManager.secPerMadi * GameManager.madiLength);
-        wall.transform.localPosition = new Vector3(0, 0, index * GameManager.madiLength);
+        wall.rigidbody.velocity = new Vector3(0, 0, -1 * GameManager.SecPerNode * GameManager.NodeLength);
+        wall.transform.localPosition = new Vector3(0, 0, (index + 1) * GameManager.NodeLength);
     }
 }
