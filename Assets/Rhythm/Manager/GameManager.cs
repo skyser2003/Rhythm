@@ -5,7 +5,7 @@ using System.Text;
 
 static class GameManager
 {
-    static public int bpm = 120;
-    static public float secPerMadi = 60.0f / (float)bpm;
-    static public int madiLength = 10;
+    static public int SpeedMultiplier = 1;
+    static public float SecPerNode { get { return SpeedMultiplier;} }
+    static public int NodeLength = 10;
 }
