@@ -8,6 +8,7 @@ public class NoteManager : MonoBehaviour
     static public NoteManager Instance = null;
 
     private List<KeyValuePair<NoteObject, NoteCriterion>> hitList = new List<KeyValuePair<NoteObject, NoteCriterion>>();
+    private List<Node> nodes = new List<Node>();
 
     private void SingleNoteHitResult(SingleNoteObject note, NoteCriterion criterion)
     {
@@ -16,6 +17,14 @@ public class NoteManager : MonoBehaviour
 
     private void LongNoteHitResult(LongNoteObject note, NoteCriterion criterion)
     {
+    }
+
+    private void CreateNode(int madi)
+    {
+        var node = new Node();
+        node.Init(madi);
+
+        nodes.Add(node);
     }
 
     private void CreateSingleNote(NoteParser.Node node, NoteParser.Vec3[] coords, int madi)
@@ -27,8 +36,8 @@ public class NoteManager : MonoBehaviour
             float ratio = (float)coord.z;
 
             var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameManager.madiLength);
-            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameManager.secPerMadi * GameManager.madiLength);
+            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameManager.NodeLength);
+            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameManager.SecPerNode * GameManager.NodeLength);
         }
     }
 
@@ -73,6 +82,8 @@ public class NoteManager : MonoBehaviour
 
             var singleNotes = node.notes.singleNotes;
             var longNotes = node.notes.longNotes;
+
+            CreateNode(i);
 
             if (singleNotes != null)
             {
