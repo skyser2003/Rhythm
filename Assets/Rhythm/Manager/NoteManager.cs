@@ -37,15 +37,12 @@ public class NoteManager : MonoBehaviour
 
             var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
             clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameManager.NodeLength);
-            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameManager.SecPerNode * GameManager.NodeLength);
+            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameManager.Speed * GameManager.NodeLength);
         }
     }
 
     private void CreateLongNote(NoteParser.Node node, NoteParser.LongNote note, int madi)
     {
-        float secPerMadi = 60.0f / (float)120;
-        int madiLength = 10;
-
         var bezier = new Bezier();
         bezier.Init(note.bezier);
 
@@ -59,8 +56,8 @@ public class NoteManager : MonoBehaviour
             float ratio = (float)coord.z;
 
             var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * madiLength);
-            clone.rigidbody.velocity = new Vector3(0, 0, -1 * secPerMadi * madiLength);
+            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameManager.NodeLength);
+            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameManager.Speed * GameManager.NodeLength);
         }
     }
 
