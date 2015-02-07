@@ -36,8 +36,8 @@ public class NoteManager : MonoBehaviour
             float ratio = (float)coord.z;
 
             var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameManager.NodeLength);
-            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameManager.Speed * GameManager.NodeLength);
+            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameConfig.NodeLength);
+            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
         }
     }
 
@@ -56,8 +56,8 @@ public class NoteManager : MonoBehaviour
             float ratio = (float)coord.z;
 
             var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameManager.NodeLength);
-            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameManager.Speed * GameManager.NodeLength);
+            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameConfig.NodeLength);
+            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
         }
     }
 
