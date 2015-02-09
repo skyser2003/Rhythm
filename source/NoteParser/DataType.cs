@@ -20,7 +20,7 @@ namespace NoteParser
 
     public class Node
     {
-        public double speed;
+        public double speed = 1.0;
         public Notes notes;
     }
 
