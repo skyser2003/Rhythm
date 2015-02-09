@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SingleNoteObject : NoteObject
 {
+    public NoteParser.SingleNote Data;
+
     SingleNoteObject()
     {
         type = NOTE_TYPE.SINGLE_NOTE;

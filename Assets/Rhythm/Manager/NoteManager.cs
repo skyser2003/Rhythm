@@ -27,38 +27,25 @@ public class NoteManager : MonoBehaviour
         nodes.Add(node);
     }
 
-    private void CreateSingleNote(NoteParser.Node node, NoteParser.Vec3[] coords, int madi)
+    private void CreateSingleNote(NoteParser.Node node, SingleNote note, int madi)
     {
-        foreach (var coord in coords)
-        {
-            float x = (float)coord.x;
-            float y = (float)coord.y;
-            float ratio = (float)coord.z;
+        var coord = note.coord;
 
-            var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameConfig.NodeLength);
-            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
-        }
+        float x = (float)coord.x;
+        float y = (float)coord.y;
+        float ratio = (float)coord.z;
+
+        var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
+        clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameConfig.NodeLength);
+        clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
+
+        clone.GetComponent<SingleNoteObject>().Data = note;
     }
 
     private void CreateLongNote(NoteParser.Node node, NoteParser.LongNote note, int madi)
     {
-        var bezier = new Bezier();
-        bezier.Init(note.bezier);
-
-        for (int i = 0; i < 100; ++i)
-        {
-            float f = i * 0.01f;
-            var coord = bezier.GetPosition(f);
-
-            float x = (float)coord.x;
-            float y = (float)coord.y;
-            float ratio = (float)coord.z;
-
-            var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-            clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameConfig.NodeLength);
-            clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
-        }
+        var clone = Instantiate(GameObject.Find("SampleLongNote")) as GameObject;
+        clone.GetComponent<LongNoteObject>().Init(note, madi);
     }
 
     // Use this for initialization
@@ -84,7 +71,10 @@ public class NoteManager : MonoBehaviour
 
             if (singleNotes != null)
             {
-                CreateSingleNote(node, singleNotes, i);
+                foreach(var singleNote in singleNotes)
+                {
+                    CreateSingleNote(node, singleNote, i);
+                }
             }
 
             if (longNotes != null)

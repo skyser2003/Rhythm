@@ -5,6 +5,13 @@ using System.Text;
 
 namespace NoteParser
 {
+    public enum SingleNoteType
+    {
+        Normal = 0,
+        Rock = 1,
+        Paper = 2
+    }
+
     public class File
     {
         public Header header;
@@ -26,8 +33,14 @@ namespace NoteParser
 
     public class Notes
     {
-        public Vec3[] singleNotes;
+        public SingleNote[] singleNotes;
         public LongNote[] longNotes;
+    }
+
+    public class SingleNote
+    {
+        public SingleNoteType type;
+        public Vec3 coord;
     }
 
     public class LongNote

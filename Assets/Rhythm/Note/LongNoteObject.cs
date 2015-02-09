@@ -3,12 +3,8 @@ using System.Collections;
 
 public class LongNoteObject : NoteObject
 {
-    private Vector3 begin;
-    private Vector3 end;
     private bool alive = true;
-
-    public Vector3 Begin { get { return begin; } }
-    public Vector3 End { get { return end; } }
+    public NoteParser.LongNote Data;
 
     LongNoteObject()
     {
@@ -18,23 +14,6 @@ public class LongNoteObject : NoteObject
     // Use this for initialization
     void Start()
     {
-        var transform = gameObject.GetComponent<Transform>();
-        begin = new Vector3(-4, 0, 10);
-        //        end = new Vector3(-10, 0, 20);
-        end = begin * 2;
-        var diff = begin - end;
-
-        var x = Mathf.Acos(diff.x / diff.magnitude) * 180 / Mathf.PI;
-        x = x - 90;
-
-        transform.Rotate(0, x, 0, Space.World);
-
-        var newScale = transform.localScale;
-        newScale.y = diff.magnitude / 2;
-        transform.localScale = newScale;
-
-        var force = gameObject.AddComponent<ConstantForce>();
-        force.force = diff.normalized;
     }
 
     // Update is called once per frame
@@ -55,10 +34,41 @@ public class LongNoteObject : NoteObject
 
     void OnTriggerExit(Collider collider)
     {
-        if(alive == true)
+        if (alive == true)
         {
             alive = false;
             Debug.Log("Long note end");
+        }
+    }
+
+    public void Init(NoteParser.LongNote note, int madi)
+    {
+        var bezier = new Bezier();
+        bezier.Init(note.bezier);
+
+        var firstPos = bezier.GetPosition(0.0f);
+        NoteParser.Vec3 prevPos = null;
+
+        for (int i = 1; i < 100; ++i)
+        {
+            float f = i * 0.01f;
+            var coord = bezier.GetPosition(f);
+            coord.z = (madi + coord.z) * GameConfig.NodeLength;
+
+            var segmentObject = Instantiate(GameObject.Find("SampleLongNoteSegment")) as GameObject;
+            var segment = segmentObject.AddComponent<LongNoteSegment>();
+
+            if (i == 1)
+            {
+                firstPos.z = (madi + firstPos.z) * GameConfig.NodeLength;
+                segment.Init(firstPos, coord);
+            }
+            else
+            {
+                segment.Init(prevPos, coord);
+            }
+
+            prevPos = coord;
         }
     }
 }
