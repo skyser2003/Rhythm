@@ -1,8 +1,9 @@
+// 69 nodes
 {
     "header": {
-        "songName": "sample",
-        "author": "Seung Ho Jang",
-        "difficulty": 3
+        "songName": "DJMAX Technika Oblivion",
+        "author": "ESTi",
+        "difficulty": 6
     },
     "nodes": [
         {
@@ -13,7 +14,7 @@
                         "coord": {
                             "x": 1.0,
                             "y": 0.0,
-                            "z": 1.0
+                            "z": 0.75
                         }
                     }
                 ],
@@ -28,6 +29,84 @@
                             {
                                 "x": 1.0,
                                 "y": 1.0,
+                                "z": 0.5
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "notes": {
+                "longNotes": [
+                    {
+                        "bezier": [
+                            {
+                                "x": 1.0,
+                                "y": 2.0,
+                                "z": 0.0
+                            },
+                            {
+                                "x": 1.0,
+                                "y": 2.0,
+                                "z": 0.75
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "notes": {
+                "singleNotes": [
+                    {
+                        "type": 0,
+                        "coord": {
+                            "x": 1.0,
+                            "y": 2.5,
+                            "z": 0.0
+                        }
+                    },
+                    {
+                        "type": 0,
+                        "coord": {
+                            "x": 1.0,
+                            "y": 3.5,
+                            "z": 0.25
+                        }
+                    },
+                    {
+                        "type": 0,
+                        "coord": {
+                            "x": 1.0,
+                            "y": 2.5,
+                            "z": 0.5
+                        }
+                    },
+                    {
+                        "type": 0,
+                        "coord": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 0.75
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "notes": {
+                "longNotes": [
+                    {
+                        "bezier": [
+                            {
+                                "x": 1.0,
+                                "y": 2.0,
+                                "z": 0.0
+                            },
+                            {
+                                "x": 1.0,
+                                "y": 2.0,
                                 "z": 0.75
                             }
                         ]
@@ -35,6 +114,5 @@
                 ]
             }
         }
- 
     ]
 }
