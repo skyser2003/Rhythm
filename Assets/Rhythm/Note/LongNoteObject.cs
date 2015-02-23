@@ -49,10 +49,19 @@ public class LongNoteObject : NoteObject
         var firstPos = bezier.GetPosition(0.0f);
         NoteParser.Vec3 prevPos = null;
 
+        if (GameConfig.LeftRightReverse == true)
+        {
+            firstPos.x *= -1;
+        }
+
         for (int i = 1; i < 100; ++i)
         {
             float f = i * 0.01f;
             var coord = bezier.GetPosition(f);
+            if(GameConfig.LeftRightReverse == true)
+            {
+                coord.x *= -1;
+            }
             coord.z = (madi + coord.z) * GameConfig.NodeLength;
 
             var segmentObject = Instantiate(GameObject.Find("SampleLongNoteSegment")) as GameObject;

@@ -35,6 +35,11 @@ public class NoteManager : MonoBehaviour
         float y = (float)coord.y;
         float ratio = (float)coord.z;
 
+        if (GameConfig.LeftRightReverse == true)
+        {
+            x *= -1;
+        }
+        
         var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
         clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameConfig.NodeLength);
         clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
