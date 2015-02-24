@@ -14,15 +14,12 @@ class LongNoteSegment : MonoBehaviour
         Last
     }
 
-    private NoteParser.Vec3 begin, end;
     private STATE state;
 
     public STATE State { get { return state; } }
 
     public void Init(NoteParser.Vec3 begin, NoteParser.Vec3 end, STATE state)
     {
-        this.begin = begin;
-        this.end = end;
         this.state = state;
 
         // Position
