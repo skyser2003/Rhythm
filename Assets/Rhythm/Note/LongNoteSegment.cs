@@ -18,9 +18,13 @@ class LongNoteSegment : MonoBehaviour
     private STATE state;
 
     public STATE State { get { return state; } }
-    
-    void Start()
+
+    public void Init(NoteParser.Vec3 begin, NoteParser.Vec3 end, STATE state)
     {
+        this.begin = begin;
+        this.end = end;
+        this.state = state;
+
         // Position
         var center = begin + end;
         center.x /= 2;
@@ -44,12 +48,5 @@ class LongNoteSegment : MonoBehaviour
         transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
         transform.localRotation = rotation;
         rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
-    }
-
-    public void Init(NoteParser.Vec3 begin, NoteParser.Vec3 end, STATE state)
-    {
-        this.begin = begin;
-        this.end = end;
-        this.state = state;
     }
 }
