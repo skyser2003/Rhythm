@@ -38,10 +38,6 @@ class LongNoteSegment : MonoBehaviour
         double length = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2));
         double xzLength = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(z, 2));
 
-        float xAngle = (float)Math.Acos(x / xzLength);// *180 / Math.PI;
-        float yAngle = (float)Math.Acos(xzLength / length);// *180 / Math.PI;
-        float zAngle = (float)Math.Acos(z / xzLength);// *180 / Math.PI;
-
         var rotation = Quaternion.LookRotation(new Vector3(0, 1, 0), unityVector);
 
         transform.localPosition = new Vector3((float)center.x, (float)center.y, (float)center.z);
