@@ -7,8 +7,18 @@ using UnityEngine;
 
 class LongNoteSegment : MonoBehaviour
 {
-    private NoteParser.Vec3 begin, end;
+    public enum STATE
+    {
+        Fist,
+        Middle,
+        Last
+    }
 
+    private NoteParser.Vec3 begin, end;
+    private STATE state;
+
+    public STATE State { get { return state; } }
+    
     void Start()
     {
         // Position
@@ -40,9 +50,10 @@ class LongNoteSegment : MonoBehaviour
         rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
     }
 
-    public void Init(NoteParser.Vec3 begin, NoteParser.Vec3 end)
+    public void Init(NoteParser.Vec3 begin, NoteParser.Vec3 end, STATE state)
     {
         this.begin = begin;
         this.end = end;
+        this.state = state;
     }
 }

@@ -53,6 +53,7 @@ public class LongNoteObject : NoteObject
         {
             firstPos.x *= -1;
         }
+        firstPos.z = (madi + firstPos.z) * GameConfig.NodeLength;
 
         for (int i = 1; i < 100; ++i)
         {
@@ -69,12 +70,15 @@ public class LongNoteObject : NoteObject
 
             if (i == 1)
             {
-                firstPos.z = (madi + firstPos.z) * GameConfig.NodeLength;
-                segment.Init(firstPos, coord);
+                segment.Init(firstPos, coord, LongNoteSegment.STATE.Fist);
+            }
+            else if(i == 100 -1)
+            {
+                segment.Init(prevPos, coord, LongNoteSegment.STATE.Last);
             }
             else
             {
-                segment.Init(prevPos, coord);
+                segment.Init(prevPos, coord, LongNoteSegment.STATE.Middle);
             }
 
             prevPos = coord;
