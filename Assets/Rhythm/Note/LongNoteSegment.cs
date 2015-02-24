@@ -42,7 +42,7 @@ class LongNoteSegment : MonoBehaviour
 
         transform.localPosition = new Vector3((float)center.x, (float)center.y, (float)center.z);
         transform.localScale = new Vector3(1.0f, 0.5f, 1.0f);
-        transform.localRotation = rotation;// new Quaternion(xAngle, yAngle, zAngle, 0.0f);// Quaternion.Euler((float)xAngle, (float)yAngle, (float)zAngle);
+        transform.localRotation = rotation;
         rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
     }
 
