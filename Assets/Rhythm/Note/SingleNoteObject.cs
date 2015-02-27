@@ -3,7 +3,8 @@ using System.Collections;
 
 public class SingleNoteObject : NoteObject
 {
-    public NoteParser.SingleNote Data;
+    private NoteParser.SingleNote data;
+    private Vector3 velocity;
 
     SingleNoteObject()
     {
@@ -19,12 +20,16 @@ public class SingleNoteObject : NoteObject
     // Update is called once per frame
     void Update()
     {
-        //gameObject.rigidbody.velocity = new Vector3(0, 0, -10);
+    }
+
+    void OnDestroy()
+    {
+        NoteManager.Instance.Remove(this);
     }
 
     public void Init(NoteParser.SingleNote note, int madi)
     {
-        Data = note;
+        data = note;
 
         var coord = note.coord;
 
@@ -38,6 +43,16 @@ public class SingleNoteObject : NoteObject
         }
 
         transform.position = new Vector3(x, y, (float)(madi + ratio) * GameConfig.NodeLength);
-        rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
+        velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
+    }
+
+    override public void Run()
+    {
+        rigidbody.velocity = velocity;
+    }
+
+    override public void Pause()
+    {
+        rigidbody.velocity = new Vector3(0, 0, 0);
     }
 }

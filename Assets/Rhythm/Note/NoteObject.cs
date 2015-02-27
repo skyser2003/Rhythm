@@ -7,7 +7,7 @@ public enum NOTE_TYPE
     LONG_NOTE
 }
 
-public class NoteObject : MonoBehaviour
+abstract public class NoteObject : MonoBehaviour
 {
     public NOTE_TYPE Type { get { return type; } }
     protected NOTE_TYPE type;
@@ -24,14 +24,6 @@ public class NoteObject : MonoBehaviour
 
     }
 
-    public void Run()
-    {
-
-    }
-
-    public void Pause()
-    {
-
-    }
-
+    abstract public void Run();
+    abstract public void Pause();
 }

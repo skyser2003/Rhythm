@@ -31,11 +31,13 @@ public class HandPosition : MonoBehaviour
     private Pose _lastPose = Pose.Unknown;
 
     private Vector3 center;
+    private int radius;
 
     void Start()
     {
         thalmicMyo = myo.GetComponent<ThalmicMyo>();
-        center = new Vector3(-3, 0, 0);
+        center = gameObject.transform.localPosition;
+        radius = 5;
     }
 
     void Update()
@@ -94,7 +96,6 @@ public class HandPosition : MonoBehaviour
         var forwardQuaternion = _antiYaw * antiRoll * Quaternion.LookRotation(myo.transform.forward);
         var forward = forwardQuaternion * Vector3.forward;
 
-        var radius = 3;
         transform.position = new Vector3(forward.x * radius, forward.y * radius, 0.0f) + center;
 
         // The above calculations were done assuming the Myo armbands's +x direction, in its own coordinate system,

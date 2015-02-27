@@ -14,6 +14,7 @@ class LongNoteSegment : MonoBehaviour
         Last
     }
 
+    private Vector3 velocity;
     private STATE state;
 
     public STATE State { get { return state; } }
@@ -44,6 +45,16 @@ class LongNoteSegment : MonoBehaviour
         transform.localPosition = new Vector3((float)center.x, (float)center.y, (float)center.z);
         transform.localScale = new Vector3(1.0f, 0.01f, 1.0f);
         transform.localRotation = rotation;
-        rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
+        velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
+    }
+
+    public void Run()
+    {
+        rigidbody.velocity = velocity;
+    }
+
+    public void Pause()
+    {
+        rigidbody.velocity = new Vector3(0, 0, 0);
     }
 }

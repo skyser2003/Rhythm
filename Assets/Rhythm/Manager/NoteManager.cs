@@ -122,15 +122,55 @@ public class NoteManager : MonoBehaviour
     {
         foreach (var note in singleNotes)
         {
+            note.Run();
         }
         foreach (var note in longNotes)
         {
-
+            note.Run();
+        }
+        foreach(var node in nodes)
+        {
+            node.Run();
         }
     }
 
     public void Pause()
     {
+        foreach (var note in singleNotes)
+        {
+            note.Pause();
+        }
+        foreach (var note in longNotes)
+        {
+            note.Pause();
+        }
+        foreach (var node in nodes)
+        {
+            node.Pause();
+        }
+     }
 
+    public void Remove(SingleNoteObject singleNote)
+    {
+        foreach(var note in singleNotes)
+        {
+            if(note == singleNote)
+            {
+                singleNotes.Remove(note);
+                break;
+            }
+        }
+    }
+
+    public void Remove(LongNoteObject longNote)
+    {
+        foreach (var note in longNotes)
+        {
+            if (note == longNote)
+            {
+                longNotes.Remove(note);
+                break;
+            }
+        }
     }
 }

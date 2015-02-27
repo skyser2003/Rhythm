@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LongNoteObject : NoteObject
 {
     private bool alive = true;
-    public NoteParser.LongNote Data;
+    private List<LongNoteSegment> segments = new List<LongNoteSegment>();
+
+    private NoteParser.LongNote data;
 
     LongNoteObject()
     {
@@ -20,6 +23,11 @@ public class LongNoteObject : NoteObject
     void Update()
     {
 
+    }
+
+    void OnDestroy()
+    {
+        NoteManager.Instance.Remove(this);
     }
 
     void OnTriggerEnter(Collider collider)
@@ -43,6 +51,8 @@ public class LongNoteObject : NoteObject
 
     public void Init(NoteParser.LongNote note, int madi)
     {
+        data = note;
+
         var bezier = new Bezier();
         bezier.Init(note.bezier);
 
@@ -67,6 +77,7 @@ public class LongNoteObject : NoteObject
 
             var segmentObject = Instantiate(GameObject.Find("SampleLongNoteSegment")) as GameObject;
             var segment = segmentObject.AddComponent<LongNoteSegment>();
+            segments.Add(segment);
 
             if (i == 1)
             {
@@ -82,6 +93,22 @@ public class LongNoteObject : NoteObject
             }
 
             prevPos = coord;
+        }
+    }
+
+    override public void Run()
+    {
+        foreach(var segment in segments)
+        {
+            segment.Run();
+        }
+    }
+
+    override public void Pause()
+    {
+        foreach (var segment in segments)
+        {
+            segment.Pause();
         }
     }
 }
