@@ -43,7 +43,6 @@ class LongNoteSegment : MonoBehaviour
         var rotation = Quaternion.LookRotation(new Vector3(0, 1, 0), unityVector);
 
         transform.localPosition = new Vector3((float)center.x, (float)center.y, (float)center.z);
-        transform.localScale = new Vector3(1.0f, 0.01f, 1.0f);
         transform.localRotation = rotation;
         velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
     }
