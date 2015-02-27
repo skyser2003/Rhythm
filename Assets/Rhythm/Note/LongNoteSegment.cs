@@ -35,11 +35,10 @@ class LongNoteSegment : MonoBehaviour
         var y = vector.y;
         var z = vector.z;
 
-        var unityVector = new Vector3((float)x, (float)y, (float)z);
-        var rotation = Quaternion.LookRotation(new Vector3(0, 1, 0), unityVector);
+        var lookVector = new Vector3((float)x, (float)y, (float)z);
 
         transform.localPosition = new Vector3((float)center.x, (float)center.y, (float)center.z);
-        transform.localRotation = rotation;
+        transform.localRotation = Quaternion.LookRotation(lookVector) * Quaternion.Euler(90, 0, 0);
         velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
     }
 
