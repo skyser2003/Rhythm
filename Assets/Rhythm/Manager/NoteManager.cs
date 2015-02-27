@@ -10,6 +10,9 @@ public class NoteManager : MonoBehaviour
     private List<KeyValuePair<NoteObject, NoteCriterion>> hitList = new List<KeyValuePair<NoteObject, NoteCriterion>>();
     private List<Node> nodes = new List<Node>();
 
+    private List<SingleNoteObject> singleNotes = new List<SingleNoteObject>();
+    private List<LongNoteObject> longNotes = new List<LongNoteObject>();
+
     private void SingleNoteHitResult(SingleNoteObject note, NoteCriterion criterion)
     {
         Destroy(note.gameObject);
@@ -29,28 +32,20 @@ public class NoteManager : MonoBehaviour
 
     private void CreateSingleNote(NoteParser.Node node, SingleNote note, int madi)
     {
-        var coord = note.coord;
-
-        float x = (float)coord.x;
-        float y = (float)coord.y;
-        float ratio = (float)coord.z;
-
-        if (GameConfig.LeftRightReverse == true)
-        {
-            x *= -1;
-        }
-        
         var clone = Instantiate(GameObject.Find("SampleNote")) as GameObject;
-        clone.GetComponent<Transform>().position = new Vector3(x, y, (float)(madi + ratio) * GameConfig.NodeLength);
-        clone.rigidbody.velocity = new Vector3(0, 0, -1 * GameConfig.Speed * GameConfig.NodeLength);
+        var singleNote = clone.GetComponent<SingleNoteObject>();
+        singleNote.Init(note, madi);
 
-        clone.GetComponent<SingleNoteObject>().Data = note;
+        singleNotes.Add(clone.GetComponent<SingleNoteObject>());
     }
 
     private void CreateLongNote(NoteParser.Node node, NoteParser.LongNote note, int madi)
     {
         var clone = Instantiate(GameObject.Find("SampleLongNote")) as GameObject;
-        clone.GetComponent<LongNoteObject>().Init(note, madi);
+        var longNote = clone.GetComponent<LongNoteObject>();
+        longNote.Init(note, madi);
+
+        longNotes.Add(longNote);
     }
 
     // Use this for initialization
@@ -121,5 +116,21 @@ public class NoteManager : MonoBehaviour
     public void AddHitResultSet(NoteObject note, NoteCriterion criterion)
     {
         hitList.Add(new KeyValuePair<NoteObject, NoteCriterion>(note, criterion));
+    }
+
+    public void Run()
+    {
+        foreach (var note in singleNotes)
+        {
+        }
+        foreach (var note in longNotes)
+        {
+
+        }
+    }
+
+    public void Pause()
+    {
+
     }
 }

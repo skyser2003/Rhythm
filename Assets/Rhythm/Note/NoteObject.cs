@@ -23,4 +23,15 @@ public class NoteObject : MonoBehaviour
     {
 
     }
+
+    public void Run()
+    {
+
+    }
+
+    public void Pause()
+    {
+
+    }
+
 }
