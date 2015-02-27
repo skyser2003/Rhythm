@@ -36,10 +36,6 @@ class LongNoteSegment : MonoBehaviour
         var z = vector.z;
 
         var unityVector = new Vector3((float)x, (float)y, (float)z);
-
-        double length = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2));
-        double xzLength = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(z, 2));
-
         var rotation = Quaternion.LookRotation(new Vector3(0, 1, 0), unityVector);
 
         transform.localPosition = new Vector3((float)center.x, (float)center.y, (float)center.z);
