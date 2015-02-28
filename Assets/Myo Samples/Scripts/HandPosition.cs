@@ -44,6 +44,7 @@ public class HandPosition : MonoBehaviour
     {
         // Update references when the pose becomes fingers spread or the q key is pressed.
         bool updateReference = false;
+        /*
         if (thalmicMyo.pose != _lastPose)
         {
             _lastPose = thalmicMyo.pose;
@@ -54,7 +55,8 @@ public class HandPosition : MonoBehaviour
 
                 ExtendUnlockAndNotifyUserAction(thalmicMyo);
             }
-        }
+        }*/
+
         if (Input.GetKeyDown("r"))
         {
             updateReference = true;
