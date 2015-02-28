@@ -296,7 +296,7 @@ GameObject:
   - 23: {fileID: 315471383}
   - 114: {fileID: 315471387}
   - 114: {fileID: 315471388}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left Criterion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -865,7 +865,7 @@ GameObject:
   - 136: {fileID: 1395213225}
   - 23: {fileID: 1395213224}
   - 54: {fileID: 1395213228}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SampleLongNoteSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1074,7 +1074,7 @@ GameObject:
   - 23: {fileID: 1607465028}
   - 114: {fileID: 1607465027}
   - 114: {fileID: 1607465032}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right Criterion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1169,7 +1169,7 @@ GameObject:
   - 23: {fileID: 1886728330}
   - 54: {fileID: 1886728329}
   - 114: {fileID: 1886728328}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SampleNote
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,6 +13,9 @@ public class NoteManager : MonoBehaviour
     private List<SingleNoteObject> singleNotes = new List<SingleNoteObject>();
     private List<LongNoteObject> longNotes = new List<LongNoteObject>();
 
+    NoteParser.Node[] nodeData = null;
+    private int currentNode = -1;
+
     private void SingleNoteHitResult(SingleNoteObject note, NoteCriterion criterion)
     {
         Destroy(note.gameObject);
@@ -58,32 +61,11 @@ public class NoteManager : MonoBehaviour
         doc.Parse(Resources.Load<TextAsset>("song/sample").text);
 
         var header = doc.File.header;
-        var nodes = doc.File.nodes;
+        nodeData = doc.File.nodes;
 
-        for (int i = 0; i < nodes.Length;++i)
+        for (int i = 0; i < nodeData.Length; ++i)
         {
-            var node = nodes[i];
-
-            var singleNotes = node.notes.singleNotes;
-            var longNotes = node.notes.longNotes;
-
-            CreateNode(i);
-
-            if (singleNotes != null)
-            {
-                foreach(var singleNote in singleNotes)
-                {
-                    CreateSingleNote(node, singleNote, i);
-                }
-            }
-
-            if (longNotes != null)
-            {
-                foreach (var longNote in longNotes)
-                {
-                    CreateLongNote(node, longNote, i);
-                }
-            }
+            GenerateNode(i);
         }
     }
 
@@ -111,6 +93,37 @@ public class NoteManager : MonoBehaviour
         }
 
         hitList.Clear();
+    }
+
+    private void GenerateNode(int nodeIndex)
+    {
+        if (nodeData.Length <= nodeIndex)
+        {
+            return;
+        }
+
+        var node = nodeData[nodeIndex];
+
+        var singleNotes = node.notes.singleNotes;
+        var longNotes = node.notes.longNotes;
+
+        CreateNode(nodeIndex);
+
+        if (singleNotes != null)
+        {
+            foreach (var singleNote in singleNotes)
+            {
+                CreateSingleNote(node, singleNote, nodeIndex);
+            }
+        }
+
+        if (longNotes != null)
+        {
+            foreach (var longNote in longNotes)
+            {
+                CreateLongNote(node, longNote, nodeIndex);
+            }
+        }   
     }
 
     public void AddHitResultSet(NoteObject note, NoteCriterion criterion)
