@@ -44,11 +44,11 @@ class LongNoteSegment : MonoBehaviour
 
     public void Run()
     {
-        rigidbody.velocity = velocity;
+        GetComponent<Rigidbody>().velocity = velocity;
     }
 
     public void Pause()
     {
-        rigidbody.velocity = new Vector3(0, 0, 0);
+        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
     }
 }

@@ -22,11 +22,11 @@ class Node
 
     public void Run()
     {
-        wall.rigidbody.velocity = velocity;
+        wall.GetComponent<Rigidbody>().velocity = velocity;
     }
 
     public void Pause()
     {
-        wall.rigidbody.velocity = new Vector3(0, 0, 0);
+        wall.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
     }
 }

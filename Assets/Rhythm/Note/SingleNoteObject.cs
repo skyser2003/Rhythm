@@ -48,11 +48,11 @@ public class SingleNoteObject : NoteObject
 
     override public void Run()
     {
-        rigidbody.velocity = velocity;
+        GetComponent<Rigidbody>().velocity = velocity;
     }
 
     override public void Pause()
     {
-        rigidbody.velocity = new Vector3(0, 0, 0);
+        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
     }
 }
